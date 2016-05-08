@@ -1,0 +1,12 @@
+extends ../layout/layout
+
+block content
+  div
+    p
+      a.btn.btn-success(href='profile/heroes/new') Create new hero
+
+  div
+    if (user.heroes.length == 0)
+      p.alert.alert-info No heroes found.
+    else
+      div

@@ -31,3 +31,16 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# IDE Folders
+.idea
+.c9
+
+# OSX folders
+**/.DS_Store
+
+# Sass
+.sass-cache
+
+# public assets
+public/assets

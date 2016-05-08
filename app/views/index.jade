@@ -1,0 +1,13 @@
+extends layout/layout
+
+block content
+    if (!user)
+        a(href="/auth/login") Login
+        br
+        a(href="/auth/register") Register
+        br
+        a(href="/auth/facebook") Facebook
+    if (user)
+        a(href="/auth/logout") Logout
+        br
+        a(href="/auth/facebook/unlink") Unlink Facebook account

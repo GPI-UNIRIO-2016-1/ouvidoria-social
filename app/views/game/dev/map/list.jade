@@ -1,0 +1,7 @@
+extends ../../../layout/layout
+
+block content
+  .col-md-12
+    for map in maps
+      a.btn.btn-default(href="/game/dev/maps/"+map._id)=map.title
+      | &nbsp;
