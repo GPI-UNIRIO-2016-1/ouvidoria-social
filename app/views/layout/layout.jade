@@ -4,16 +4,15 @@ head
   meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
   meta(charset="utf-8")
 
-  link(rel="stylesheet", href="/css/bootstrap.css")
-  link(rel="stylesheet", href="/assets/css/game.css")
+  link(rel="stylesheet", href="/css/bootstrap.min.css")
+  style.
+    .navbar {
+      border-radius: 0px !important;
+    }
+
   block head-stylesheets
 
   script(src="/js/jquery-2.1.4.min.js")
-  script(src="/socket.io/socket.io.js")
-  script(src="/assets/js/ouvidoria.js")
-  script.
-      var userHash = '#{(user) ? user.myHash : ""}';
-      loadSockets(userHash);
 
   block head-scripts
 
@@ -27,16 +26,12 @@ body
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href="/") Sanctuary RPG
+        a.navbar-brand(href="/") Ouvidoria Social
 
       div.collapse.navbar-collapse#bs-example-navbar-collapse-1
         ul.nav.navbar-nav
           li
             a(href='/') Home
-
-          li
-            a(href="/") Monsters
-              // span.sr-only (current)
 
           li.dropdown
             a.dropdown-toggle(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Painel de Controle
@@ -56,9 +51,11 @@ body
                 a(href="#") Another separated link
 
         form.navbar-form.navbar-left.navbar-left(role="search")
-          div.form-group
-            input.form-control(type="text", placeholder="Search")
-          button.btn.btn-default(type="submit") Submit
+          div.input-group
+            input.form-control(type="text", placeholder="Search for...")
+            span.input-group-btn
+              button.btn.btn-default(type="button")
+                i.glyphicon.glyphicon-search
 
         ul.nav.navbar-nav.navbar-right
           if (!user)
@@ -67,7 +64,7 @@ body
           if (user)
             li.dropdown
               a.dropdown-toggle(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Hello, #{user.name}
-                span.caret
+                span.caret &nbsp;
               ul.dropdown-menu
                 li
                   a(href="/profile/config") Profile
@@ -76,7 +73,7 @@ body
                   a(href="/auth/logout") Logout
 
             li
-              img.img-circle(src='#{user.photo}')
+              img.img-circle(src='#{user.photo_small}')
 
   .container
     while message = flash.shift()

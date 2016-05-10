@@ -48,11 +48,13 @@ module.exports = function(passport) {
       // facebook will send back the token and profile
       function(token, refreshToken, profile, done) {
 
+        console.log(profile);
+
         // asynchronous
         process.nextTick(function() {
 
           // find the user in the database based on their facebook id
-          User.findOne({ 'facebookId' : profile.id }).populate('heroes').exec(function(err, user) {
+          User.findOne({ 'facebookId' : profile.id }).exec(function(err, user) {
 
             // if there is an error, stop everything and return that
             // ie an error connecting to the database
@@ -79,7 +81,8 @@ module.exports = function(passport) {
               newUser.name  = profile.displayName; // look at the passport user profile to see how names are returned
               newUser.username = profile.emails[0].value;
               newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-              newUser.photo = profile.photos[0].value;
+              newUser.photo = "https://graph.facebook.com/" + profile.id + "/picture?type=large"; // profile.photos[0].value;
+              newUser.photo_thumb = profile.photos[0].value;
 
               // save our user to the database
               newUser.save(function(err) {

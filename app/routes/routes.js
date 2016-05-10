@@ -25,7 +25,8 @@ router.post('/auth/login', authRoutes.login.post);
 // User routes
 router.all('/profile/*', ensureAuthenticated);
 router.get('/profile/config', profileRoutes.profile);
-router.get('/user/list', userRoutes.get.list);
+router.get('/user/view/:id/', userRoutes.view);
+router.get('/user/list', userRoutes.list);
 
 // Notifier routes
 router.post('/notify/:apikey', notifyRoutes.notify);

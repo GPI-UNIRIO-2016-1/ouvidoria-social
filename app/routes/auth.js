@@ -15,7 +15,7 @@ methods.facebook.unlink = function(req, res, next) {
     if (error) console.error(error);
     else {
       console.log(body);
-      res.redirect('/logout');
+      res.redirect('/auth/logout');
     }
 
   });
