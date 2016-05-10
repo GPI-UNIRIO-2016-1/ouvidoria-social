@@ -38,11 +38,11 @@ body
               span.caret
             ul.dropdown-menu
               li
-                a(href="#") Gerenciar usuários
+                a(href="/user/list") Gerenciar usuários
               li
-                a(href="#") Another Action
+                a(href="/post/list") Gerenciar postagens
               li
-                a(href="#") Something else
+                a(href="#") Gerenciar categorias
               li.divider(role="separator")
               li
                 a(href="#") Separated link
@@ -83,7 +83,8 @@ body
     for notification in notifications
       p=notification
 
-    block content
-      | Ok
+    div.row.well
+      block content
+        | Ok
 
   script(src="/js/bootstrap.js")

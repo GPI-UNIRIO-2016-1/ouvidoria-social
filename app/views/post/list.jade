@@ -1,0 +1,28 @@
+//
+   Created by urielbertoche on 5/10/2016.
+
+extends ../layout/layout
+block content
+   h2 Lista de postagens
+   div.col-sm-12
+      table.table
+         thead
+            td Título
+            td Autor
+            td Criada em
+            td Respondida em
+            td Resolvida em
+            td
+         each post, key in posts
+            tr
+               td=post.title
+               td=post.author.name
+               td=moment(post.create_on).format("DD-MM-YYYY")
+               td=moment(post.answered_on).format("DD-MM-YYYY")
+               td=moment(post.solved_on).format("DD-MM-YYYY")
+               td
+                  a.btn.btn-default.btn-xs(href='/post/view/' + post.id)
+                     i.glyphicon.glyphicon-search
+      .row
+         .col-md-12
+            a.btn.btn-default(href='/post/new') Adicionar nova
