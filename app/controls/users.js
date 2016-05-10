@@ -7,24 +7,37 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 var methods = {};
 
-methods.edit = function (req, res, next) {
-    var userId = req.params.id;
+methods.register = {};
 
-    User.findOne({_id: userId}, function (err, doc) {
+methods.register.get = function (req, res, next) {
+    res.render('../view/user/form', { });
+};
 
+methods.register.post = function (req, res, next) {
+    var post_data = req.body;
+
+    var user = {
+        name: post_data.name,
+        email: post_data.email
+    };
+
+    var password = post_data.password;
+
+    User.register(new User(user), password, function (err, user) {
+        if (err)
+            return res.render('../view/user/form', {account: user});
+
+        req.flash("success", "Incluido com sucesso.");
+        res.redirect("/user/list");
     });
 };
 
 methods.view = function (req, res, next) {
-    // var userId = new ObjectId(req.params.id);
     var userId = req.params.id;
 
-    // console.log(userId);
     User.findOne({_id: userId}, function (err, doc) {
         if (err)
             return next(err);
-
-        console.log(doc);
 
         res.render('../views/user/view', {viewUser: doc});
     });
