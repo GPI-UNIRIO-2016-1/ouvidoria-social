@@ -14,7 +14,8 @@ var User = new Schema({
   password: String,
   email: String,
   facebookId: String,
-  photo: String,
+  // photo: String,
+  // photo_thumb: String,
   myHash: String
 }, {
   toObject: {
@@ -23,6 +24,14 @@ var User = new Schema({
   toJSON: {
     virtuals: true
   }
+});
+
+User.virtual("photo").get(function () {
+  return "https://graph.facebook.com/" + this.facebookId + "/picture?type=large";
+});
+
+User.virtual("photo_small").get(function () {
+  return "https://graph.facebook.com/" + this.facebookId + "/picture?type=small";
 });
 
 User.pre('save', function (next) {

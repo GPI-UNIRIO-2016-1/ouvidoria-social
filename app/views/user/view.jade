@@ -1,0 +1,18 @@
+//
+   Created by urielbertoche on 5/9/2016.
+
+extends ../layout/layout
+block content
+   h1 Informações do usuário
+
+   div.col-md-2
+      img(src=viewUser.photo)
+
+   div.col-md-10
+      dl.dl-horizontal
+         dt Nome:
+         dd=viewUser.name
+         dt Email:
+         dd=viewUser.email
+         dt Posts:
+         dd 0
