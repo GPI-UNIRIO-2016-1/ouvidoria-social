@@ -1,0 +1,12 @@
+//
+   Created by urielbertoche on 5/10/2016.
+
+extends ../layout/layout
+block content
+   h2 Informações da postagem
+   div.col-md-12
+      .row
+         h3=post.title
+         .col-md-12!=md(post.message)
+         .col-md-12
+            small Por !{post.author.name} em !{moment(post.create_on).format("DD-MM-YYYY")}

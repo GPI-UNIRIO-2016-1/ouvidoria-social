@@ -3,21 +3,20 @@
 
 extends ../layout/layout
 block content
-   div.row
-      h2 Adicionar novo usuário
-      div.col-sm-6
-         form(method="POST", action="/user/new")
-            .form-group
-               label(for='name') Nome
-               input.form-control(name='name', placeholder='Nome', type='text')
-            .form-group
-               label(for='email') Email
-               input.form-control(name='email', placeholder='Email', type='email')
-            .form-group
-               label(for='password') Senha
-               input.form-control(name='password', placeholder='Senha', type='password')
-            .form-group
-               label(for='password2') Confirmação de senha
-               input.form-control(name='password2', placeholder='Senha', type='password')
+   h2 Adicionar novo usuário
+   div.col-sm-6
+      form(method="POST", action="/user/new")
+         .form-group
+            label(for='name') Nome
+            input.form-control(name='name', placeholder='Nome', type='text')
+         .form-group
+            label(for='email') Email
+            input.form-control(name='email', placeholder='Email', type='email')
+         .form-group
+            label(for='password') Senha
+            input.form-control(name='password', placeholder='Senha', type='password')
+         .form-group
+            label(for='password2') Confirmação de senha
+            input.form-control(name='password2', placeholder='Senha', type='password')
 
-            button.btn.btn-default Salvar
+         button.btn.btn-default Salvar
