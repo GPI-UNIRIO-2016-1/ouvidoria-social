@@ -10,7 +10,7 @@ var methods = {};
 methods.register = {};
 
 methods.register.get = function (req, res, next) {
-    res.render('../view/user/form', { });
+    res.render('../views/user/form', { });
 };
 
 methods.register.post = function (req, res, next) {
@@ -18,14 +18,17 @@ methods.register.post = function (req, res, next) {
 
     var user = {
         name: post_data.name,
+        username: post_data.email,
         email: post_data.email
     };
 
     var password = post_data.password;
 
     User.register(new User(user), password, function (err, user) {
-        if (err)
-            return res.render('../view/user/form', {account: user});
+        if (err) {
+            console.log(err);
+            return res.render('../views/user/form', {account: user});
+        }
 
         req.flash("success", "Incluido com sucesso.");
         res.redirect("/user/list");
