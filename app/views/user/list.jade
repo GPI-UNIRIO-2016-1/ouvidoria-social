@@ -1,0 +1,15 @@
+//
+   Created by urielbertoche on 5/9/16.
+
+extends ../layout/layout
+
+block content
+  div.row
+    div.col-sm-12
+      table.table
+        each user, key in users
+          tr
+            td
+              img(src=user.photo)
+            td=user.name
+            td=user.email

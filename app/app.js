@@ -24,7 +24,7 @@ var Cron = require('./scripts/cron');
 // set up database
 var dbConfig = require('../config/mongodb.js');
 var mongoose = require('mongoose');
-mongoose.connect(dbConfig.local.url);
+mongoose.connect(dbConfig.mongolab.url);
 
 // passport stuff
 var passport = require('passport');

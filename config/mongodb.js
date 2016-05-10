@@ -7,6 +7,6 @@ module.exports = {
         url: "mongodb://localhost/ouvidoriasocial"
     },
     mongolab: {
-        url: "mongodb://ouvidoriasocial:X&NwaV{+a4a'mMn}WRkPCpZnNyZ@zWh,@ds017582.mlab.com:17582/ouvidoriasocial"
+        url: "mongodb://ouvidoriasocial:q1w2e3r4t5@ds017582.mlab.com:17582/ouvidoriasocial"
     }
 };

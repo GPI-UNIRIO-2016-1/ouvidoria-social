@@ -4,6 +4,7 @@ var authRoutes = require('./auth');
 var notifyRoutes = require('../lib/notify/routes');
 var profileRoutes = require('./profile');
 var ensureAuthenticated = require('../middlewares/ensureAuthenticated');
+var userRoutes = require("../controls/users");
 
 var router = express.Router();
 
@@ -24,6 +25,7 @@ router.post('/auth/login', authRoutes.login.post);
 // User routes
 router.all('/profile/*', ensureAuthenticated);
 router.get('/profile/config', profileRoutes.profile);
+router.get('/user/list', userRoutes.get.list);
 
 // Notifier routes
 router.post('/notify/:apikey', notifyRoutes.notify);
