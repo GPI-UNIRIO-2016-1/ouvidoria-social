@@ -1,0 +1,25 @@
+//
+   Created by luisoliveiras on 5/9/16.
+
+extends ../layout/layout
+
+block content
+  div.row
+    div.col-sm-12
+      h2 Lista de Categorias
+
+      table.table
+        thead
+          td Nome
+          td Descrição
+        each category, key in categories
+          tr
+            td=category.name
+            td=category.description
+            td
+              a.btn.btn-default.btn-xs(href='#')
+                i.glyphicon.glyphicon-pencil
+
+      .row
+        .col-md-12
+          a.btn.btn-default(href='#') Adicionar nova
