@@ -1,0 +1,25 @@
+//
+   Created by luisoliveiras on 5/15/16.
+
+extends ../layout/layout
+
+block content
+  div.row
+    div.col-sm-12
+      h2 Lista de Unidades
+
+      table.table
+        thead
+          td Nome
+          td Descrição
+        each unit, key in units
+          tr
+            td=unit.name
+            td=unit.description
+            td
+              a.btn.btn-default.btn-xs(href='#')
+                i.glyphicon.glyphicon-pencil
+
+      .row
+        .col-md-12
+          a.btn.btn-default(href='#') Adicionar nova

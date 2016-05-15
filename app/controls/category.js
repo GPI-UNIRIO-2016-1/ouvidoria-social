@@ -25,7 +25,7 @@ methods.register.post = function (req, res, next) {
         }
 
         req.flash("success", "Incluido com sucesso.");
-        res.redirect("/user/list");
+        res.redirect("/category/list");
     })
 
 };
