@@ -1,0 +1,17 @@
+//
+   Created by luisoliveiras on 5/10/2016.
+
+extends ../layout/layout
+block content
+   div.row
+      h2 Adicionar nova categoria
+      div.col-sm-6
+         form(method="POST", action= # )
+            .form-group
+               label(for='name') Nome
+               input.form-control(name='name', placeholder='Nome', type='text')
+            .form-group
+               label(for='description') Descrição
+               input.form-control(name='description', placeholder='Descrição', type='text')
+
+            button.btn.btn-default Salvar
