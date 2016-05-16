@@ -35,6 +35,9 @@ User.virtual("photo_small").get(function () {
 });
 
 User.pre('save', function (next) {
+  if (this.email == undefined)
+    this.email = "No email defined";
+
   var myHash = crypto.createHmac('sha1', global.config.SECRET).update(this.email).digest('hex');
   if (this.myHash != myHash) {
     this.myHash = myHash;
