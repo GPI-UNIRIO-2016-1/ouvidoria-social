@@ -2,7 +2,7 @@
  * Created by luisoliveiras on 5/15/2016.
  */
 
-var Category = require('../models/unit')
+var Unit = require('../models/unit')
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var methods = {};
@@ -34,9 +34,9 @@ methods.register.post = function (req, res, next) {
 
 
 methods.view = function (req, res, next) {
-    var unitName = req.params.name;
+    var unitId = req.params.id;
 
-    Unit.findOne({ name: unitName }, function (err, doc) {
+    Unit.findOne({ _id: unitId }, function (err, doc) {
         if (err)
             return next(err);
 
@@ -50,9 +50,7 @@ methods.list = function (req, res, next) {
         if (err)
             return next(err);
 
-        console.log(units);
-
-        res.render('../views/unit/list', { unit: units });
+        res.render('../views/unit/list', { units: units });
     });
 };
 

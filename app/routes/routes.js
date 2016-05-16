@@ -6,6 +6,8 @@ var profileRoutes = require('./profile');
 var ensureAuthenticated = require('../middlewares/ensureAuthenticated');
 var userRoutes = require("../controls/users");
 var postRoutes = require("../controls/posts");
+var unitRoutes = require("../controls/unit");
+var categoryRoutes = require("../controls/category");
 
 var router = express.Router();
 
@@ -38,6 +40,20 @@ router.get('/post/list', postRoutes.list);
 router.all("/post/new", ensureAuthenticated);
 router.get("/post/new", postRoutes.add.get);
 router.post("/post/new", postRoutes.add.post);
+
+// Unit routes
+router.get('/unit/view/:id', unitRoutes.view);
+router.get('/unit/list', unitRoutes.list);
+router.all("/unit/new", ensureAuthenticated);
+router.get("/unit/new", unitRoutes.register.get);
+router.post("/unit/new", unitRoutes.register.post);
+
+// Category routes
+router.get('/category/view/:id', categoryRoutes.view);
+router.get('/category/list', categoryRoutes.list);
+router.all("/category/new", ensureAuthenticated);
+router.get("/category/new", categoryRoutes.register.get);
+router.post("/category/new", categoryRoutes.register.post);
 
 // Notifier routes
 router.post('/notify/:apikey', notifyRoutes.notify);
