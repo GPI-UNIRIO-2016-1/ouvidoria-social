@@ -56,7 +56,7 @@ gulp.task('client-styles', function () {
 });
 
 gulp.task('client-scripts', function() {
-    var filesArray = ['app/game/client/sockets/main.js', 'app/game/client/sockets/**/*.js', 'app/game/client/**/*.js']
+    var filesArray = ['app/game/client/sockets/main.js', 'app/game/client/sockets/**/*.js', 'app/client/**/*.js']
     return gulp.src(filesArray)
         // .pipe(jshint('.jshintrc'))
         // .pipe(jshint.reporter('default'))

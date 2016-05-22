@@ -40,6 +40,9 @@ router.get('/post/list', postRoutes.list);
 router.all("/post/new", ensureAuthenticated);
 router.get("/post/new", postRoutes.add.get);
 router.post("/post/new", postRoutes.add.post);
+router.get("/post/like/:id", postRoutes.ajax.like);
+router.get("/post/report/:id", postRoutes.ajax.report);
+router.post("/post/report/:id", postRoutes.ajax.report);
 
 // Unit routes
 router.get('/unit/view/:id', unitRoutes.view);
