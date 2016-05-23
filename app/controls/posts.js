@@ -35,9 +35,28 @@ methods.add.post = function (req, res, next) {
 methods.view = function (req, res, next) {
   var postId = req.params.id;
 
-  Post.findOne({_id: postId}).populate("author").exec(function (err, doc) {
+  var populateQuery = [
+    {
+      path: 'author'
+    },
+    {
+      path: 'unit',
+      select: 'managers'
+    },
+    {
+      path: 'comments',
+      populate: {
+        path: 'author',
+        model: 'User'
+      }
+    }
+  ];
+
+  Post.findOne({_id: postId}).populate(populateQuery).exec(function (err, doc) {
     if (err)
       return next(err);
+
+    console.log(doc);
 
     res.render("../views/post/view", {post: doc, md: marked, moment: moment});
   });
@@ -116,16 +135,30 @@ methods.ajax.comment = function (req, res, next) {
   var postId = req.params.id;
   var isUnitManager = false;
 
-  Post.findOne({_id: postId}).populate('unit').exec(function (err, doc) {
+  var populateQuery = [
+    {
+      path: 'unit',
+      select: 'managers'
+    },
+    {
+      path: 'comments',
+      populate: {
+        path: 'user',
+        model: 'User',
+        select: 'name'
+      }
+    }
+  ];
+
+  Post.findOne({_id: postId}).populate(populateQuery).exec(function (err, doc) {
     if (doc.unit != null) {
       var index = _.findIndex(doc.unit.managers, function (manager) { return manager._id == req.user.id; });
       isUnitManager = index != -1;
     }
 
     var comment = {
-      _id: req.user.id,
+      author: req.user,
       message: req.body.message,
-      created_on:  new Date(),
       isAnswer: isUnitManager
     };
 
@@ -135,7 +168,7 @@ methods.ajax.comment = function (req, res, next) {
       if (err)
         return next(err);
 
-      resn.json(post);
+      res.json(post);
     });
   });
 };

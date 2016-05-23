@@ -43,6 +43,7 @@ router.post("/post/new", postRoutes.add.post);
 router.get("/post/like/:id", postRoutes.ajax.like);
 router.get("/post/report/:id", postRoutes.ajax.report);
 router.post("/post/report/:id", postRoutes.ajax.report);
+router.post("/post/comment/:id", postRoutes.ajax.comment);
 
 // Unit routes
 router.get('/unit/view/:id', unitRoutes.view);

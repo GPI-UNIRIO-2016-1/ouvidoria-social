@@ -14,7 +14,7 @@ var del = require('del');
 
 
 gulp.task('default', ['clean', 'browser-sync'], function () {
-    gulp.start('client-styles', 'client-scripts');
+    gulp.start('client-styles', 'client-scripts', 'client-watch');
 });
 
 gulp.task('browser-sync', ['nodemon'], function() {
@@ -46,17 +46,17 @@ gulp.task('nodemon', function (cb) {
 
 gulp.task('client-styles', function () {
     return merge(
-        gulp.src(['app/game/client/alertify.core.css', 'app/game/client/**/*.css']),
-        sass('app/game/client/game.scss', {style: 'expanded'})
+        gulp.src(['app/client/**/*.css']),
+        sass('app/client/ouvidoria-social.scss', {style: 'expanded'})
       )
-      .pipe(concat("game.css"))
+      .pipe(concat("ouvidoria.css"))
       .pipe(autoprefixer('last 2 version'))
       .pipe(gulp.dest('public/assets/css'))
       .pipe(notify({message: 'Game styles task complete.'}));
 });
 
 gulp.task('client-scripts', function() {
-    var filesArray = ['app/game/client/sockets/main.js', 'app/game/client/sockets/**/*.js', 'app/client/**/*.js']
+    var filesArray = ['app/client/**/*.js'];
     return gulp.src(filesArray)
         // .pipe(jshint('.jshintrc'))
         // .pipe(jshint.reporter('default'))
@@ -70,7 +70,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('client-watch', function () {
-    gulp.watch(['app/game/client/**/*.scss', 'app/game/client/**/*.css'], ['client-styles']);
+    gulp.watch(['app/client/**/*.css'], ['client-styles']);
 
-    gulp.watch('app/game/client/**/*.js', ['client-scripts']);
+    gulp.watch(['app/client/**/*.js'], ['client-scripts']);
 });

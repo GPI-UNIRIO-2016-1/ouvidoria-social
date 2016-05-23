@@ -14,7 +14,7 @@ var User       = require('../app/models/user');
 // load the auth variables
 var configAuth = require('./auth');
 
-module.exports = function(passport) {
+module.exports = function(passport, env) {
 
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
@@ -36,12 +36,26 @@ module.exports = function(passport) {
   // =========================================================================
   // FACEBOOK ================================================================
   // =========================================================================
+  var clientID,
+      clientSecret,
+      callbackURL;
+
+  if (env == "prod") {
+    clientID = configAuth.facebookAuth.clientID;
+    clientSecret = configAuth.facebookAuth.clientSecret;
+    callbackURL = configAuth.facebookAuth.callbackURL;
+  } else {
+    clientID = configAuth.facebookTestAuth.clientID;
+    clientSecret = configAuth.facebookTestAuth.clientSecret;
+    callbackURL = configAuth.facebookTestAuth.callbackURL;
+  }
+
   passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
-        clientID        : configAuth.facebookAuth.clientID,
-        clientSecret    : configAuth.facebookAuth.clientSecret,
-        callbackURL     : configAuth.facebookAuth.callbackURL,
+        clientID        : clientID,
+        clientSecret    : clientSecret,
+        callbackURL     : callbackURL,
         profileFields   : ['id', 'displayName', 'photos', 'email']
       },
 

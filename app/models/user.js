@@ -26,6 +26,18 @@ var User = new Schema({
   }
 });
 
+User.virtual("displayName").get(function () {
+  var displayName = this.name || "";
+  if (displayName.length == 0)
+    displayName = this.email || "";
+  if (displayName.length == 0)
+    displayName = this.facebookId || "";
+  if (displayName.length == 0)
+    displayName = username || "Anônimo";
+
+  return displayName;
+});
+
 User.virtual("photo").get(function () {
   return "https://graph.facebook.com/" + this.facebookId + "/picture?type=large";
 });
