@@ -14,7 +14,10 @@ var Posts = function () {
   };
 
   var like = function () {
-    console.log(post_id);
+    $.get("/post/like/" + post_id, function (data) {
+      console.log(data);
+      $("#like").load("/post/view/" + post_id + " #like");
+    });
   };
 
   var setup = function (pid) {

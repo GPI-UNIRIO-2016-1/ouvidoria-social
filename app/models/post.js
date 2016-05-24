@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 var prune = require("underscore.string/prune");
 var Schema = mongoose.Schema;
+var _ = require("underscore");
 
 var commentSchema = new Schema({
   author: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -34,6 +35,19 @@ var Post = new Schema({
     }
   ]
 });
+
+Post.methods.liked = function (user) {
+  if (user != undefined && user._id != undefined) {
+    var index = _.findIndex(this.likes, function (like) {
+      return like._id == user.id;
+    });
+
+    if (index != -1)
+      return true;
+  }
+
+  return false;
+};
 
 Post.virtual('prunedTitle').get(function () {
   return prune(this.title, 30);

@@ -2,3 +2,7 @@ hr {
     background-color: #ccc;
     border-top-color: #ccc;
 }
+
+.pointer {
+    cursor: pointer;
+}
