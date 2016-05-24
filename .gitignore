@@ -45,3 +45,6 @@ node_modules
 # public assets
 public/assets
 Web.config
+
+# env configs
+.env

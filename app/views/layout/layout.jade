@@ -5,6 +5,7 @@ head
   meta(charset="utf-8")
 
   link(rel="stylesheet", href="/css/bootstrap.min.css")
+  link(rel="stylesheet", href="/assets/css/ouvidoria.css")
   style.
     .navbar {
       border-radius: 0px !important;
@@ -13,10 +14,41 @@ head
   block head-stylesheets
 
   script(src="/js/jquery-2.1.4.min.js")
+  script(src="/assets/js/ouvidoria.js")
+  script(type='text/javascript').
+    var ouvidoria;
+
+    $(function() {
+      ouvidoria = new Ouvidoria();
+      var post_id = !{(post == undefined) ? 0 : "\"" + post._id + "\""};
+
+      ouvidoria.init({
+        post_id: post_id
+      });
+    });
 
   block head-scripts
 
 body
+  script.
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '251299965231942',
+        xfbml: true,
+        version: 'v2.6'
+      });
+    };
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
   nav.navbar.navbar-default
     div.container-fluid
       //- Brand and toggle get grouped for better mobile display
@@ -42,7 +74,9 @@ body
               li
                 a(href="/post/list") Gerenciar postagens
               li
-                a(href="#") Gerenciar categorias
+                a(href="/category/list") Gerenciar categorias
+              li
+                a(href="/unit/list") Gerenciar unidades
               li.divider(role="separator")
               li
                 a(href="#") Separated link
@@ -86,5 +120,8 @@ body
     div.row.well
       block content
         | Ok
+
+    div.row.footer
+      div.fb-like(data-share="true", data-width="450", data-show-faces="true")
 
   script(src="/js/bootstrap.js")

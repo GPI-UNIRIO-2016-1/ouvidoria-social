@@ -17,9 +17,9 @@ block content
             td=category.name
             td=category.description
             td
-              a.btn.btn-default.btn-xs(href='#')
+              a.btn.btn-default.btn-xs(href='/category/view/' + category.id)
                 i.glyphicon.glyphicon-pencil
 
       .row
         .col-md-12
-          a.btn.btn-default(href='#') Adicionar nova
+          a.btn.btn-default(href='/category/new') Adicionar nova

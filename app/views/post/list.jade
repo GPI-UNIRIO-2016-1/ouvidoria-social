@@ -9,20 +9,30 @@ block content
          thead
             td Título
             td Autor
+            td Curtidas
+            td Reportes
             td Criada em
             td Respondida em
             td Resolvida em
             td
          each post, key in posts
             tr
-               td=post.title
+               td=post.prunedTitle
                td=post.author.name
+               td=post.likes.length
+               td=post.reports.length
                td=moment(post.create_on).format("DD-MM-YYYY")
                td=moment(post.answered_on).format("DD-MM-YYYY")
                td=moment(post.solved_on).format("DD-MM-YYYY")
                td
                   a.btn.btn-default.btn-xs(href='/post/view/' + post.id)
                      i.glyphicon.glyphicon-search
+                  | #{" "}
+                  a.btn.btn-default.btn-xs(href='/post/like/' + post.id)
+                     i.glyphicon.glyphicon-heart
+                  | #{" "}
+                  a.btn.btn-default.btn-xs(href='/post/report/' + post.id)
+                     i.glyphicon.glyphicon-fire
       .row
          .col-md-12
             a.btn.btn-default(href='/post/new') Adicionar nova

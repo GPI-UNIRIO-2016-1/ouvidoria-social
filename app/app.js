@@ -10,8 +10,13 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo/es5')(session);
 var app = express();
 
+require('dotenv').config();
+
 var io = socket_io();
 app.io = io;
+
+// Setting enviroment
+var env = process.env.NODE_ENV || "prod";
 
 // Setting up config
 global.config = config;
@@ -28,7 +33,7 @@ mongoose.connect(dbConfig.mongolab.url);
 
 // passport stuff
 var passport = require('passport');
-require("../config/passport")(passport);
+require("../config/passport")(passport, env);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

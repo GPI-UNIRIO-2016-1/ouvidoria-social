@@ -26,6 +26,18 @@ var User = new Schema({
   }
 });
 
+User.virtual("displayName").get(function () {
+  var displayName = this.name || "";
+  if (displayName.length == 0)
+    displayName = this.email || "";
+  if (displayName.length == 0)
+    displayName = this.facebookId || "";
+  if (displayName.length == 0)
+    displayName = username || "Anônimo";
+
+  return displayName;
+});
+
 User.virtual("photo").get(function () {
   return "https://graph.facebook.com/" + this.facebookId + "/picture?type=large";
 });
@@ -35,6 +47,9 @@ User.virtual("photo_small").get(function () {
 });
 
 User.pre('save', function (next) {
+  if (this.email == undefined)
+    this.email = "No email defined";
+
   var myHash = crypto.createHmac('sha1', global.config.SECRET).update(this.email).digest('hex');
   if (this.myHash != myHash) {
     this.myHash = myHash;
