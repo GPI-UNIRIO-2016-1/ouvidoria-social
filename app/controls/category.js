@@ -54,4 +54,19 @@ methods.list = function (req, res, next) {
     });
 };
 
+methods.ajax = {};
+
+methods.ajax.list = function (req, res, next) {
+    var q = req.query.q || "";
+
+    Category.find({name: new RegExp(q, 'i')}, function (err, categories) {
+        if (err)
+            return next(err);
+
+        console.log(categories);
+
+        res.json(categories);
+    });
+};
+
 module.exports = methods;
