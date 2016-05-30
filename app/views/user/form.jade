@@ -14,9 +14,9 @@ block content
             input.form-control(name='email', placeholder='Email', type='email', patern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
          .form-group
             label(for='password') Senha
-            input.form-control(name='password', placeholder='Senha', type='password', pattern='[A-Za-z0-9].{6,}', title='Deve conter pelo menos 6 caracteres não especiais- letras ou numeros')
+            input.form-control(name='password', placeholder='Senha', type='password', pattern='[A-Za-z0-9].{6,10}', title='Deve ter entre 6 e 10 caracteres não especiais - letras ou numeros')
          .form-group
             label(for='password2') Confirmação de senha
-            input.form-control(name='password2', placeholder='Senha', type='password')
+            input.form-control(name='password2', placeholder='Senha', type='password', pattern='[A-Za-z0-9].{6,10}')
 
          button.btn.btn-default Salvar
