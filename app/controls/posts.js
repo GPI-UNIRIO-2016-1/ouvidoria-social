@@ -17,19 +17,24 @@ methods.add.get = function (req, res, next) {
 
 methods.add.post = function (req, res, next) {
   var post_data = req.body;
+  if (post_data.title != "" && post_data.message != "") {
+      var post = new Post();
+      post.author = req.user;
+      post.message = post_data.message;
+      post.title = post_data.title;
 
-  var post = new Post();
-  post.author = req.user;
-  post.message = post_data.message;
-  post.title = post_data.title;
+      post.save(function (err) {
+          if (err)
+              return next(err);
 
-  post.save(function (err) {
-    if (err)
-      return next(err);
-
-    req.flash("success", "Post criado com sucesso!");
-    res.redirect("/post/list");
-  });
+          req.flash("success", "Post criado com sucesso!");
+          res.redirect("/post/list");
+      });
+  }
+  else {
+      req.flash("warning", "Titulo ou comentário não preenchido.");
+      res.redirect("/post/new");
+  }
 };
 
 methods.view = function (req, res, next) {

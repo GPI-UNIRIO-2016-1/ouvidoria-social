@@ -15,24 +15,29 @@ methods.register.get = function (req, res, next) {
 
 methods.register.post = function (req, res, next) {
     var post_data = req.body;
+    if (post_data.name != "" && post_data.email != "" && post_data.password != "") {
+        var user = {
+            name: post_data.name,
+            username: post_data.email,
+            email: post_data.email
+        };
 
-    var user = {
-        name: post_data.name,
-        username: post_data.email,
-        email: post_data.email
-    };
+        var password = post_data.password;
 
-    var password = post_data.password;
+        User.register(new User(user), password, function (err, user) {
+            if (err) {
+                console.log(err);
+                return res.render('../views/user/form', { account: user });
+            }
 
-    User.register(new User(user), password, function (err, user) {
-        if (err) {
-            console.log(err);
-            return res.render('../views/user/form', {account: user});
-        }
-
-        req.flash("success", "Incluido com sucesso.");
-        res.redirect("/user/list");
-    });
+            req.flash("success", "Incluido com sucesso.");
+            res.redirect("/user/list");
+        });
+    }
+    else {
+        req.flash("warning", "Favor preencher todos os campos");
+        res.redirect("/user/new");
+    }
 };
 
 methods.view = function (req, res, next) {

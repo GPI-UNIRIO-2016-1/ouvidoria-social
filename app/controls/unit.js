@@ -16,20 +16,24 @@ methods.register.get = function (req, res, next) {
 
 methods.register.post = function (req, res, next) {
     var unit = new Unit();
+    if (req.body.name != "") {
+        unit.name = req.body.name
+        unit.description = req.body.description
 
-    unit.name = req.body.name
-    unit.description = req.body.description
+        unit.save(function (err) {
+            if (err) {
+                console.log(err);
+                return res.render('../views/unit/form', {});
+            }
 
-    unit.save(function (err) {
-        if (err) {
-            console.log(err);
-            return res.render('../views/unit/form', {});
-        }
-
-        req.flash("success", "Incluido com sucesso.");
-        res.redirect("/unit/list");
-    })
-
+            req.flash("success", "Incluido com sucesso.");
+            res.redirect("/unit/list");
+        })
+    }
+    else {
+        req.flash("warning", "Nome da unidade não preenchido");
+        res.redirect("/unit/new");
+    }
 };
 
 

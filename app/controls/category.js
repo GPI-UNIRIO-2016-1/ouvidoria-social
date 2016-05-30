@@ -14,20 +14,24 @@ methods.register.get = function (req, res, next) {
 
 methods.register.post = function (req, res, next) {
     var category = new Category();
+    if(req.body.name != ""){
+        category.name = req.body.name
+        category.description = req.body.description
 
-    category.name = req.body.name
-    category.description = req.body.description
+        category.save(function (err) {
+            if (err) {
+                console.log(err);
+                return res.render('../views/category/form', {});
+            }
 
-    category.save(function (err) {
-        if (err) {
-            console.log(err);
-            return res.render('../views/category/form', {});
-        }
-
-        req.flash("success", "Incluido com sucesso.");
-        res.redirect("/category/list");
+            req.flash("success", "Incluido com sucesso.");
+            res.redirect("/category/list");
     })
-
+    }
+    else{
+        req.flash("warning", "Nome da categoria não preenchido");
+        res.redirect("/category/new");
+    }
 };
 
 
