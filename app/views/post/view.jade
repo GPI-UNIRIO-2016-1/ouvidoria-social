@@ -3,24 +3,27 @@
 
 extends ../layout/layout
 block content
-   h2 Informações da postagem
+   div.col-md-12
+      h1=post.title
+
    div.col-md-12
       .row
-         h3=post.title
-         .col-md-12!=md(post.message)
          .col-md-12
             small Por !{post.author.name} em !{moment(post.create_on).format("DD-MM-YYYY")}
-         .col-md-12
             span#like.pointer.pull-right(data-role='like', class=(post.liked(user)?"text-success":"text-warning"))
                | !{post.liked(user)?" Apoiado ":" Apoiar "}
                i.glyphicon.glyphicon-bullhorn
-            hr
+
+         .col-md-12
+            .well!=md(post.message)
+
+      .row
+         .col-md-12
+            h4 Comentários
             .input-group
                textarea.form-control(data-role='comment-message')
                span.input-group-addon.btn-primary.btn-sm(data-role='comment') Enviar comentário
 
-      .row
-         h4 Comentários
          .col-md-12#comments
             each comment, key in post.comments
                if comment.author

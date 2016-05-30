@@ -1,4 +1,17 @@
 extends ../layout/layout
 
 block content
-    img(src="https://graph.facebook.com/" + user.facebookId + "/picture?type=large")
+    div.col-sm-3
+        img(src="https://graph.facebook.com/" + user.facebookId + "/picture?type=large")
+
+    div.col-sm-9
+        if (!user)
+            a(href="/auth/login") Login
+            br
+            a(href="/auth/register") Register
+            br
+            a(href="/auth/facebook") Facebook
+        if (user)
+            a(href="/auth/logout") Logout
+            br
+            a(href="/auth/facebook/unlink") Unlink Facebook account

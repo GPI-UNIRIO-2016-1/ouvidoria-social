@@ -18,5 +18,11 @@ hr {
     white-space: pre-line;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 5em;
+    line-height: 1.5em;
+    max-height: 7.5em;
+}
+
+#tagcloud {
+    width: 80%;
+    height: 240px;
 }
