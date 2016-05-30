@@ -53,4 +53,14 @@ Post.virtual('prunedTitle').get(function () {
   return prune(this.title, 30);
 });
 
+Post.virtual('displayClass').get(function () {
+  if (this.likes.length >= 10)
+    return "panel-danger";
+
+  if (this.likes.length >= 1)
+    return "panel-warning";
+
+  return "panel-primary";
+});
+
 module.exports = mongoose.model('Post', Post);
