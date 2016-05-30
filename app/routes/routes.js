@@ -79,6 +79,7 @@ router.post("/unit/new", unitRoutes.register.post);
 // Category routes
 router.get('/category/view/:id', categoryRoutes.view);
 router.get('/category/list', categoryRoutes.list);
+router.get('/category/ajax/list/', categoryRoutes.ajax.list);
 router.all("/category/new", ensureAuthenticated);
 router.get("/category/new", categoryRoutes.register.get);
 router.post("/category/new", categoryRoutes.register.post);
