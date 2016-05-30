@@ -10,10 +10,14 @@ block content
          .col-md-12!=md(post.message)
          .col-md-12
             small Por !{post.author.name} em !{moment(post.create_on).format("DD-MM-YYYY")}
+         .col-md-12
+            span#like.pointer.pull-right(data-role='like', class=(post.liked(user)?"text-success":"text-warning"))
+               | !{post.liked(user)?" Apoiado ":" Apoiar "}
+               i.glyphicon.glyphicon-bullhorn
             hr
             .input-group
                textarea.form-control(data-role='comment-message')
-               span.input-group-addon.btn.btn-primary(data-role='comment') Enviar comentário
+               span.input-group-addon.btn-primary.btn-sm(data-role='comment') Enviar comentário
 
       .row
          h4 Comentários
