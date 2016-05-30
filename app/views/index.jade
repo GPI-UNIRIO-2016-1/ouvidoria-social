@@ -1,26 +1,40 @@
 extends layout/layout
 
 block content
-    div.col-sm-8.posts
-        each post, key in posts
-            .panel.panel-info.post
-                .panel-heading
-                    =((post.title.length > 0) ? post.title : "Sem título")
-                .panel-body
-                    p=(post.message.length > 0) ? post.message : "Sem texto da mensagem"
+    .row-fluid
+        div.col-sm-8.posts
+            h1 Postagens recentes
+            each post, key in posts
+                .panel.panel-primary.post
+                    .panel-heading
+                        =((post.title.length > 0) ? post.title : "Sem título")
+                    .panel-body
+                        p=(post.message.length > 0) ? post.message : "Sem texto da mensagem"
+                        small.pull-left
+                            a(href='/post/view/' + post._id) Ver mais
+                        small.pull-right
+                            if (post.comments.length == 0)
+                                | Nenhum comentário
+                            else if (post.comments.length == 1)
+                                | 1 Comentário
+                            else
+                                span.contador=post.comments.length
+                                | &nbsp;comentários
 
-    div.col-sm-4
-        #word_cloud
-            =words
 
-    div.col-sm-12
-        if (!user)
-            a(href="/auth/login") Login
-            br
-            a(href="/auth/register") Register
-            br
-            a(href="/auth/facebook") Facebook
-        if (user)
-            a(href="/auth/logout") Logout
-            br
-            a(href="/auth/facebook/unlink") Unlink Facebook account
+        div.col-sm-4
+            h1 Tagcloud
+            #tagcloud
+
+    script(type='text/javascript').
+        var words=!{JSON.stringify(words || [])};
+
+        $(function () {
+            $("#tagcloud").jQCloud(words, {
+                autoResize: true,
+                fontSize: {
+                    from: 0.1,
+                    to: 0.05
+                }
+            });
+        });
