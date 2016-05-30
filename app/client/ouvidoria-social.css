@@ -6,3 +6,17 @@ hr {
 .pointer {
     cursor: pointer;
 }
+
+.posts>.panel>.panel-heading {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.posts>.panel>.panel-body>p {
+    max-width: 100%;
+    white-space: pre-line;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 5em;
+}

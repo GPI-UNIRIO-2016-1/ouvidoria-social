@@ -1,5 +1,8 @@
 var express = require('express');
 
+var Post = require("../models/post");
+var moment = require("moment");
+
 var authRoutes = require('./auth');
 var notifyRoutes = require('../lib/notify/routes');
 var profileRoutes = require('./profile');
@@ -11,8 +14,14 @@ var categoryRoutes = require("../controls/category");
 
 var router = express.Router();
 
-router.get('/', function (req, res) {
-  res.render('index');
+router.get('/', function (req, res, next) {
+
+  Post.find({}, function (err, docs) {
+    if (err)
+      return next(err);
+
+    res.render('index', {posts: docs, moment: moment});
+  });
 });
 
 // Auth routes

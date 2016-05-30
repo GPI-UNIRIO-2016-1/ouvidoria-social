@@ -1,13 +1,26 @@
 extends layout/layout
 
 block content
-    if (!user)
-        a(href="/auth/login") Login
-        br
-        a(href="/auth/register") Register
-        br
-        a(href="/auth/facebook") Facebook
-    if (user)
-        a(href="/auth/logout") Logout
-        br
-        a(href="/auth/facebook/unlink") Unlink Facebook account
+    div.col-sm-8.posts
+        each post, key in posts
+            .panel.panel-info.post
+                .panel-heading
+                    =((post.title.length > 0) ? post.title : "Sem título")
+                .panel-body
+                    p=(post.message.length > 0) ? post.message : "Sem texto da mensagem"
+
+    div.col-sm-4
+        #word_cloud
+            =words
+
+    div.col-sm-12
+        if (!user)
+            a(href="/auth/login") Login
+            br
+            a(href="/auth/register") Register
+            br
+            a(href="/auth/facebook") Facebook
+        if (user)
+            a(href="/auth/logout") Logout
+            br
+            a(href="/auth/facebook/unlink") Unlink Facebook account
