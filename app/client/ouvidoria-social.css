@@ -8,9 +8,26 @@ hr {
 }
 
 .posts>.panel>.panel-heading {
+    position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
+}
+
+.posts>.panel>.panel-heading .panel-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    width: 90%;
+}
+
+.panel-heading>.likes {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
 }
 
 .posts>.panel>.panel-body>p {

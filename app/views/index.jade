@@ -5,14 +5,27 @@ block content
         div.col-sm-8.posts
             h1 Postagens recentes
             each post, key in posts
-                .panel.panel-primary.post
+                .panel.post(class=post.displayClass)
                     .panel-heading
-                        =((post.title.length > 0) ? post.title : "Sem título")
+                        .panel-title=((post.title.length > 0) ? post.title : "Sem título")
+                        span.pull-right.label.label-default.likes
+                            !=post.likes.length + "&nbsp;&nbsp;"
+                            i.glyphicon.glyphicon-bullhorn
+                                .sr-only Número de apoios
+                            //
+                                if (post.likes.length == 0)
+                                    | Ainda não foi apoiado
+                                else if (post.likes.length == 1)
+                                    | Apoiado uma vez
+                                else
+                                    | Apoiado&nbsp;
+                                    span.contador=post.likes.length
+                                    | &nbsp;vezes
                     .panel-body
                         p=(post.message.length > 0) ? post.message : "Sem texto da mensagem"
-                        small.pull-left
-                            a(href='/post/view/' + post._id) Ver mais
                         small.pull-right
+                            a(href='/post/view/' + post._id) Ver mais
+                        small.pull-left
                             if (post.comments.length == 0)
                                 | Nenhum comentário
                             else if (post.comments.length == 1)
@@ -23,6 +36,8 @@ block content
 
 
         div.col-sm-4
+            h1 Participe
+            a.btn.btn-block.btn-danger(href='/post/new/') Crie sua reclamação
             h1 Tagcloud
             #tagcloud
 

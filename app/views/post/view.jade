@@ -24,16 +24,17 @@ block content
                textarea.form-control(data-role='comment-message')
                span.input-group-addon.btn-primary.btn-sm(data-role='comment') Enviar comentário
 
-         .col-md-12#comments
-            each comment, key in post.comments
-               if comment.author
-                  .row-fluid
-                     .col-md-1
-                        img(src=comment.author.photo_small)
-                     .col-md-11
-                        h5=comment.author.displayName
-                        p=comment.message
-               else
-                  .row-fluid
-                     .col-md-11.col-md-offset-1
-                        small API antiga, comentário não pode ser exibido
+            hr
+            #comments
+               each comment, key in post.comments
+                  if comment.author
+                     .row-fluid
+                        .col-md-1
+                           img(src=comment.author.photo_small)
+                        .col-md-11
+                           h5=comment.author.displayName
+                           p=comment.message
+                  else
+                     .row-fluid
+                        .col-md-11.col-md-offset-1
+                           small API antiga, comentário não pode ser exibido
