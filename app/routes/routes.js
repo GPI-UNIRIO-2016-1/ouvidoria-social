@@ -14,28 +14,39 @@ var categoryRoutes = require("../controls/category");
 
 var router = express.Router();
 
-router.get('/', function (req, res, next) {
-
-  Post.find({}, function (err, docs) {
+router.get('/answered', function (req, res, next) {
+  Post.find({answered_on: { $ne: null} }).sort({"answered_on": -1}).exec(function (err, docs) {
     if (err)
       return next(err);
 
-    var words = [
-      {text: "CCET", weight: 10},
-      {text: "BSI", weight: 8},
-      {text: "TI", weight: 7},
-      {text: "UNIRIO", weight: 8},
-      {text: "Banheiro", weight: 7},
-      {text: "Elevador", weight: 6},
-      {text: "Água", weight: 5},
-      {text: "Wi-fi", weight: 4},
-      {text: "Sit", weight: 8},
-      {text: "Amet", weight: 6.2},
-      {text: "Consectetur", weight: 5},
-      {text: "Adipiscing", weight: 5}
-    ];
+    res.render('index', {posts: docs, moment: moment});
+  });
+});
 
-    res.render('index', {posts: docs, moment: moment, words: words});
+router.get('/popular', function (req, res, next) {
+  Post.find({}).sort({"comments": -1}).exec(function (err, docs) {
+    if (err)
+      return next(err);
+
+    res.render('index', {posts: docs, moment: moment});
+  });
+});
+
+router.get('/hot', function (req, res, next) {
+  Post.find({}).sort("-likes").exec(function (err, docs) {
+    if (err)
+      return next(err);
+
+    res.render('index', {posts: docs, moment: moment});
+  });
+});
+
+router.get('/', function (req, res, next) {
+  Post.find({}).sort("-created_on").exec(function (err, docs) {
+    if (err)
+      return next(err);
+
+    res.render('index', {posts: docs, moment: moment});
   });
 });
 

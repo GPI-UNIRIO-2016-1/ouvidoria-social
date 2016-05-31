@@ -68,6 +68,9 @@ app.use(attachAuth);
 var attachNotifications = require('./middlewares/attachNotifications');
 app.use(attachNotifications);
 
+var attachTagCloud = require("./middlewares/tagCloud");
+app.use(attachTagCloud);
+
 // Set public dir
 app.use(express.static(path.join(__dirname, '../public')));
 
