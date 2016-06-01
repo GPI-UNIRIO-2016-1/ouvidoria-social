@@ -14,6 +14,10 @@ var commentSchema = new Schema({
   inAnswer: Boolean
 });
 
+//var likeSchema = new Schema({
+//  user: {type: Schema}
+//})
+
 var Post = new Schema({
   message: String,
   title: String,
@@ -25,12 +29,12 @@ var Post = new Schema({
   comments: [commentSchema],
   likes: [
     {
-      user: {type: Schema.Types.ObjectId, ref: 'User', unique: true}
+      user: {type: Schema.Types.ObjectId, ref: 'User'}
     }
   ],
   reports: [
     {
-      user: {type: Schema.Types.ObjectId, ref: 'User', unique: true},
+      user: {type: Schema.Types.ObjectId, ref: 'User'},
       reason: String
     }
   ]
