@@ -4,6 +4,9 @@ block content
     .row-fluid
         div.col-sm-8.posts
             h1 Postagens recentes
+            if (posts.length == 0)
+                p.text-danger Infelizmente não foram encontradas nenhuma postagem com este filtro.
+
             each post, key in posts
                 .panel.post(class=post.displayClass)
                     .panel-heading
