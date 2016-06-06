@@ -15,7 +15,7 @@ methods.register.get = function (req, res, next) {
 
 methods.register.post = function (req, res, next) {
     var post_data = req.body;
-    if (post_data.name != "" && post_data.email != "" && post_data.password != "") {
+    if (post_data.name != "" && post_data.email != "" && post_data.password != "" && post_data.password2 == post_data.password) {
         var user = {
             name: post_data.name,
             username: post_data.email,
