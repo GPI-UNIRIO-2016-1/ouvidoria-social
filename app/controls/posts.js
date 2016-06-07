@@ -3,6 +3,7 @@
  */
 
 var Post = require('../models/post');
+var Category = require('../models/category');
 var marked = require("marked");
 var moment = require("moment");
 var ObjectId = require('mongoose').Types.ObjectId;
@@ -22,13 +23,39 @@ methods.add.post = function (req, res, next) {
       post.author = req.user;
       post.message = post_data.message;
       post.title = post_data.title;
+      post.categories = post_data.categories;
 
-      post.save(function (err) {
-          if (err)
-              return next(err);
+      Category.find({
+        _id: {
+          $in: post.categories
+        }
+      }).exec(function (err, categories) {
+        if (err) return next(err);
 
-          req.flash("success", "Post criado com sucesso!");
-          res.redirect("/post/list");
+        var categories_list = [];
+
+        for (var i = 0; i < categories.length; i++) {
+          var category = {
+            id: categories[i]._id,
+            text: categories[i].name
+          };
+
+          categories_list.push(category);
+        }
+
+        post_data.categories = categories_list;
+
+        //req.flash("info", "Cancelado para teste");
+        //return res.render("post/form", {post: post_data});
+
+        post.save(function (err) {
+            if (err)
+                return next(err);
+
+            req.flash("success", "Post criado com sucesso!");
+            res.redirect("/post/list");
+        });
+
       });
   }
   else {

@@ -10,7 +10,65 @@ block content
             label(for='title') Título
             input.form-control(name='title', placeholder='Título', type='text', maxlength='55', pattern='.{3,55}')
          .form-group
+            label(for='categories') Categorias
+            select.form-control(name='categories', id='categories', multiple='true')
+               if (post != undefined && post.categories != undefined)
+                  each category, key in post.categories
+                     option(selected=true, value=category.id)=category.text
+         .form-group
             label(for='message') Mensagem
             textarea.form-control(name='message', rows=5, placeholder='Mensagem')
 
          button.btn.btn-default Salvar
+
+   script(type='text/javascript').
+      $(function() {
+         var post = !{JSON.stringify(post || {})};
+
+         console.log(post);
+
+         if (post.message != undefined)
+            $("[name=message]").val(post.message);
+
+         if (post.title != undefined)
+            $("[name=title]").val(post.title);
+
+         $("#categories").select2({
+            placeholder: {
+               id: '',
+               text: 'Selecione ao menos uma categoria'
+            },
+            ajax: {
+               url: "/category/ajax/list/",
+               dataType: 'json',
+               delay: 150,
+               data: function (params) {
+                  return {
+                     q: params.term
+                  };
+               },
+               processResults: function (data, params) {
+                  // console.log(data, params);
+                  var results = [];
+                  for (var i = 0; i < data.length; i++) {
+                     console.log(data[i]);
+                     var result = data[i];
+
+                     result = {
+                        id: result._id,
+                        text: result.name
+                     };
+
+                     results.push(result);
+                  }
+
+                  console.log(results);
+
+                  return {
+                     results: results
+                  };
+               },
+               cache: true
+            }
+         });
+      });

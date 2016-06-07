@@ -27,6 +27,7 @@ var Post = new Schema({
   unit: {type: Schema.Types.ObjectId, ref: 'Unit'},
   author: {type: Schema.Types.ObjectId, ref: 'User'},
   comments: [commentSchema],
+  tags: [{type: Schema.Types.ObjectId, ref: 'Category'}],
   likes: [
     {
       user: {type: Schema.Types.ObjectId, ref: 'User'}
