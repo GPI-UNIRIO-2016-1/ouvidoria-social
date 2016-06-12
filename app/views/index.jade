@@ -10,7 +10,7 @@ block content
             each post, key in posts
                 .panel.post(class=post.displayClass)
                     .panel-heading
-                        .panel-title=((post.title.length > 0) ? post.title : "Sem título")
+                        .panel-title=(post.title != undefined ? ((post.title.length > 0) ? post.title : "Sem título") : "Sem título")
                         span.pull-right.label.label-default.likes
                             !=post.likes.length + "&nbsp;&nbsp;"
                             i.glyphicon.glyphicon-bullhorn
@@ -25,7 +25,7 @@ block content
                                     span.contador=post.likes.length
                                     | &nbsp;vezes
                     .panel-body
-                        p=(post.message.length > 0) ? post.message : "Sem texto da mensagem"
+                        .post-preview!=(post.message != undefined ? ((post.message.length > 0) ? post.message : "Sem texto da mensagem") : "Sem texto da mensagem")
                         small.pull-right
                             a(href='/post/view/' + post._id) Ver mais
                         small.pull-left
