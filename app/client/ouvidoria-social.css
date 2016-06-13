@@ -43,3 +43,14 @@ hr {
     width: 80%;
     height: 240px;
 }
+
+.post-preview {
+    white-space: pre-line;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-preview img {
+    max-height: 3em;
+    max-width: 3em;
+}

@@ -12,3 +12,10 @@ Para iniciar o servidor basta executar
 
 É possível que na instalação das dependências o Gulp não tenha sido instalado, para resolver este problema basta rodar o comando
 `npm install gulp -g`
+
+
+TODO
+    Gerar documento pontuando motivos para ignorar backlog
+    Deletar postagens
+    Edição unidades
+    
